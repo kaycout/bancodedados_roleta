@@ -42,6 +42,8 @@ Administrador ▪ admin_id (Chave Primária)Nome ▪ Email ▪ Senha ▪ empresa
 
 
 # Modelo Lógico com as normalizações
+<img src="normalizacao_livre.png" width=1000 height=80>
+
 
 
 ## 1 Normalização
