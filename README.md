@@ -13,13 +13,14 @@
 6.	QRCode
 7.	Publicidade - Para anúncios que serão exibidos no site.
 8. Arquivos
-9.	Caso haja necessidade – Configurações do Sorteio (para futuras personalizações e novas animações) essa entidade ajuda.
+9. Configuração do sorteio - Caso haja alguma alteração da roleta.
+10.	Caso haja necessidade – Configurações do Sorteio (para futuras personalizações e novas animações) essa entidade ajuda.
 
 
 # Modelo Conceitual
 Definição das entidades do banco de dados.
 
-<img src="modelo-conceitual.png" width=1000>
+<img src="modelo-conceitual2.png" width=1000>
 
 ## MODELAGEM BANCO DE DADOS
 
@@ -46,9 +47,11 @@ A modelação  do banco de dados foi feito à partir da definição das entidade
 ▪ Arquivos ▪ arquivos-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ nome-arquivo ▪ data_geracao.
 
 
+▪ Configuracoes sorteio ▪ configuracoes_sorteio-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ chave ▪valor.
+
 
 # Modelo Lógico com as normalizações
-<img src="normalizacao-livre.png" width=1000 height=80>
+<img src="normalizacao-livre2.png" width=1000 height=80>
 
 ## 1 Normalização
 
@@ -159,12 +162,23 @@ create table arquivos (
 	foreign key (id_sorteio) references sorteio(id_sorteio) on delete cascade
     -- com essa tabela, será permitido que qualquer participante baixe o arquivo.
 );
+
+-- está tabela seráa criada, caso no futuro sinta a necessidade de mudar regras da roleta, 
+-- tempo de animação e até mesmo critéios de desempate.
+create table configuracoes_sorteio (
+	id_configurações_sorteio int auto_increment primary key,
+    id_sorteio int not null,
+    chave varchar (255) not null,
+    -- chave e valor são para arazenas futuras alterações de configuração da roleta.
+    valor varchar (255) not null,
+    foreign key (id_sorteio) references sorteio(id_sorteio) on delete cascade
+);
 ```
 
 ## Modelo de Entidade Relacional
 
 #### Diagrama do relacionamento - ROLETA
-<img src="diagrama-de-relacionamento-roleta.png" width=1000>
+<img src="diagrama-de-relacionamento-roleta2.png" width=1000>
 
 
 
