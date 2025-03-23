@@ -30,7 +30,6 @@ Sorteio ▪ Serviço_ID (Chave Estrangeira referenciando a tabela Serviços) ▪
 ### Código escrito em sql
 
 ```sql create database roletadb; use roletadb;
-
 -- Criação do banco de dados - Roleta para sorteios.
 create database roletadb;
 
@@ -126,7 +125,6 @@ create table arquivos (
 	foreign key (id_sorteio) references sorteio(id_sorteio) on delete cascade
     -- com essa tabela, será permitido que qualquer participante baixe o arquivo.
 );
-
 
 
 
