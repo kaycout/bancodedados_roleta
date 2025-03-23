@@ -15,29 +15,35 @@
 8. Arquivos
 9.	Caso haja necessidade – Configurações do Sorteio (para futuras personalizações e novas animações) essa entidade ajuda.
 
-# MODELAGEM BANCO DE DADOS
 
-A modelação  do banco de dados foi feito à partir da definição das entidades, pensando nisso, foi realizado a normalização com todos os atributos necessários para esse banco de dados.
+# Modelo Conceitual
+Definição das entidades do banco de dados.
+
+<img src="modelo-conceitual.png" width=1000>
+
+## MODELAGEM BANCO DE DADOS
+
+A modelação  do banco de dados foi feito à partir da definição das entidades, pensando nisso, foi realizado o modelo lógicom juntamente com as normalizações, sendo eles todos os atributos necessários para o banco de dados.
 
 # Especificação dos elementos usados no banco de dados.
 
 • Tabelas:
 
-▪ Empresa ▪ empresa_id (Chave Primária) ▪ Nome ▪ empreendimento ▪ data_sorteio ▪ periodo.
+▪ Empresa ▪ empresa_id (Chave Primária) ▪ nome ▪ empreendimento ▪ data_sorteio ▪ periodo.
 
-Administrador ▪ admin_id (Chave Primária)Nome ▪ Email ▪ Senha ▪ empresa_id (Chave Estrangeira) referenciando a tabela empresa. 
+▪ Administrador ▪ admin_id (Chave Primária) nome ▪ email ▪ senha ▪ empresa_id (Chave Estrangeira) referenciando a tabela empresa. 
 
-▪ Sorteio ▪ empresa_id (Chave Estrangeira referenciando a tabela empresa) ▪ Administrador (Chave Estrangeira referenciando a tabela administrador)  data da criação ▪ finalizado.
+▪ Sorteio ▪ sorteio_id ▪ (Chave Primária) ▪ empresa_id ▪ administrador_id (Chaves Estrangeiras referenciando as tabelas empresa e administrador) ▪ data da criação ▪ finalizado.
 
-▪ Participante ▪ nome ▪ equipe ▪ Supervisão ▪ sorteio_id ▪ via-qr.
+▪ Participante ▪ participante_id ▪ (Chave Primária) ▪ sorteio_id (Chave Estrangeira referenciando a tabela sorteio) ▪ nome ▪ equipe ▪ Supervisão ▪ via-qr.
 
-▪ Resultado ▪ resultado-id ▪ sorteio_id ▪ participante-id ▪ posicao. 
+▪ Resultado ▪ resultado-id ▪ (Chave Primária) ▪ sorteio_id ▪ (Chave Estrangeira referenciando a tabela sorteio) ▪ participante-id ▪ posicao. 
 
-▪ QRCode ▪ qr-id ▪ sorteio-id ▪ codigo ▪ data_geracao.
+▪ QRCode ▪ qr-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ codigo ▪ data_geracao.
 
-▪ Publicidade ▪ publicidade_id ▪ titulo ▪ imagem_url ▪link-destino ▪ tipo.
+▪ Publicidade ▪ publicidade_id ▪ (Chave Primária) ▪ titulo ▪ imagem_url ▪link-destino ▪ tipo.
 
-▪ Arquivos ▪ arquivos-id ▪ sorteio-id ▪ nome-arquivo ▪ data_geracao.
+▪ Arquivos ▪ arquivos-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ nome-arquivo ▪ data_geracao.
 
 
 
