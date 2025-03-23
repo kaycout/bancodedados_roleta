@@ -12,7 +12,8 @@
 5.	Resultado
 6.	QRCode
 7.	Publicidade - Para anúncios que serão exibidos no site.
-8.	Caso haja necessidade – Configurações do Sorteio (para futuras personalizações e novas animações) essa entidade ajuda.
+8. Arquivos
+9.	Caso haja necessidade – Configurações do Sorteio (para futuras personalizações e novas animações) essa entidade ajuda.
 
 # MODELAGEM BANCO DE DADOS
 
@@ -22,9 +23,32 @@ A modelação  do banco de dados foi feito à partir da definição das entidade
 
 • Tabelas:
 
-Empresa ▪ empresa_id (Chave Primária) ▪ Nome ▪ empreendimento ▪ data_sorteio ▪ periodo.
-Administrador ▪ admin_id (Chave Primária) ▪ Nome ▪ Email ▪ Senha ▪ empresa_id (Chave Estrangeira) referenciando a tabela empresa. 
-Sorteio ▪ Serviço_ID (Chave Estrangeira referenciando a tabela Serviços) ▪ Data ▪ Horário ▪ Cabeleireiro o Estoque ▪ Produto_ID (Chave Primária) ▪ Nome ▪ Quantidade ▪ Data_Entrada ▪ Data_Saída o Funcionários ▪ Funcionário_ID (Chave Primária) ▪ Nome ▪ Função ▪ Horário_Trabalho ▪ Salário
+▪ Empresa ▪ empresa_id (Chave Primária) ▪ Nome ▪ empreendimento ▪ data_sorteio ▪ periodo.
+
+Administrador ▪ admin_id (Chave Primária)Nome ▪ Email ▪ Senha ▪ empresa_id (Chave Estrangeira) referenciando a tabela empresa. 
+
+▪ Sorteio ▪ empresa_id (Chave Estrangeira referenciando a tabela empresa) ▪ Administrador (Chave Estrangeira referenciando a tabela administrador)  data da criação ▪ finalizado.
+
+▪ Participante ▪ nome ▪ equipe ▪ Supervisão ▪ sorteio_id ▪ via-qr.
+
+▪ Resultado ▪ resultado-id ▪ sorteio_id ▪ participante-id ▪ posicao. 
+
+▪ QRCode ▪ qr-id ▪ sorteio-id ▪ codigo ▪ data_geracao.
+
+▪ Publicidade ▪ publicidade_id ▪ titulo ▪ imagem_url ▪link-destino ▪ tipo.
+
+▪ Arquivos ▪ arquivos-id ▪ sorteio-id ▪ nome-arquivo ▪ data_geracao.
+
+
+
+# Modelo Lógico com as normalizações
+
+
+## 1 Normalização
+
+## 2 Normalização
+
+## 3 Normalização
 
 # MODELO FISICO - Banco de dados
 ### Código escrito em sql
@@ -125,8 +149,11 @@ create table arquivos (
 	foreign key (id_sorteio) references sorteio(id_sorteio) on delete cascade
     -- com essa tabela, será permitido que qualquer participante baixe o arquivo.
 );
+```
 
+## Modelo de Entidade Relacional
 
+#### Diagrama do relacionamento - ROLETA
 
 
 
