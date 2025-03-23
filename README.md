@@ -121,7 +121,10 @@ create table qrcode (
 	foreign key (id_sorteio) references sorteio(id_sorteio) on delete cascade
 );
 
--- a tabela publicidade não faz relacão com nenhuma outra tabela, sendo assim, ela pode ser considerada como tabela independente, sendo utilizada apenas para armazenar innformações de arquivos de anúncios que serão exibidos no sistema.
+-- a tabela publicidade não faz relacão com nenhuma outra tabela, sendo assim, 
+-- ela pode ser considerada como tabela independente,
+-- sendo utilizada apenas para armazenar innformações de arquivos de anúncios
+-- que serão exibidos no sistema.
 create table publicidade (
 	id_publicidade int auto_increment primary key,
 	titulo varchar(255) not null,
