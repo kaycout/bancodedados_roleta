@@ -23,7 +23,7 @@ Definição das entidades do banco de dados.
 
 ## MODELAGEM BANCO DE DADOS
 
-A modelação  do banco de dados foi feito à partir da definição das entidades, pensando nisso, foi realizado o modelo lógicom juntamente com as normalizações, sendo eles todos os atributos necessários para o banco de dados.
+A modelação  do banco de dados foi feito à partir da definição das entidades, pensando nisso, foi realizado o modelo lógico juntamente com as normalizações, sendo eles todos os atributos necessários para o banco de dados.
 
 # Especificação dos elementos usados no banco de dados.
 
@@ -31,7 +31,7 @@ A modelação  do banco de dados foi feito à partir da definição das entidade
 
 ▪ Empresa ▪ empresa_id (Chave Primária) ▪ nome ▪ empreendimento ▪ data_sorteio ▪ periodo.
 
-▪ Administrador ▪ admin_id (Chave Primária) nome ▪ email ▪ senha ▪ empresa_id (Chave Estrangeira) referenciando a tabela empresa. 
+▪ Administrador ▪ admin_id (Chave Primária) nome ▪ email ▪ senha ▪ empresa_id (Chave Estrangeira referenciando a tabela empresa). 
 
 ▪ Sorteio ▪ sorteio_id ▪ (Chave Primária) ▪ empresa_id ▪ administrador_id (Chaves Estrangeiras referenciando as tabelas empresa e administrador) ▪ data da criação ▪ finalizado.
 
