@@ -5,30 +5,33 @@
 • Para o nosso Projeto Integrador, cujo o tema trata-se de uma roleta  para ser usada em estabelecimentos, foi criado um banco de dados chamado (roletadb;).
 
 • Logo em seguida, para a estrutura do banco de dados da roleta, foi pensado e definido algumas das identidades principais, sendo elas;
-1.	Empresa
-2.	Administrador
-3.	Participante
-4.	Sorteio
-5.	Resultado
-6.	QRCode
-7.	Publicidade - Para anúncios que serão exibidos no site.
-8. Arquivos
-9. Configuração do sorteio - Caso haja alguma alteração da roleta.
-10.	Caso haja necessidade – Configurações do Sorteio (para futuras personalizações e novas animações) essa entidade ajuda.
+1. Roleta
+2. Empresa
+3. Administrador
+4. Participante
+5. Sorteio
+6. Resultado
+7. QRCode
+8. Publicidade - Para anúncios que serão exibidos no site.
+9. Arquivos
+10. Configuração do sorteio - Caso haja alguma alteração da roleta.
+11.	Caso haja necessidade – Configurações do Sorteio (para futuras personalizações e novas animações) essa entidade ajuda.
 
 
 # Modelo Conceitual
 Definição das entidades do banco de dados.
 
-<img src="modelo-conceitual2.png" width=1000>
+<img src="modelo-conceitual.png" width=1000>
 
 ## MODELAGEM BANCO DE DADOS
 
-A modelação  do banco de dados foi feito à partir da definição das entidades, pensando nisso, foi realizado o modelo lógico juntamente com as normalizações, sendo eles todos os atributos necessários para o banco de dados.
+A modelação  do banco de dados foi feita à partir da definição das entidades, pensando nisso, foi realizado o modelo lógico juntamente com as normalizações, sendo eles todos os atributos necessários para o banco de dados.
 
 # Especificação dos elementos usados no banco de dados.
 
 • Tabelas:
+
+roleta ▪ roleta_id (Chave Primária).
 
 ▪ Empresa ▪ empresa_id (Chave Primária) ▪ nome ▪ empreendimento ▪ data_sorteio ▪ periodo.
 
@@ -36,18 +39,18 @@ A modelação  do banco de dados foi feito à partir da definição das entidade
 
 ▪ Sorteio ▪ sorteio_id ▪ (Chave Primária) ▪ empresa_id ▪ administrador_id (Chaves Estrangeiras referenciando as tabelas empresa e administrador) ▪ data da criação ▪ finalizado.
 
-▪ Participante ▪ participante_id ▪ (Chave Primária) ▪ sorteio_id (Chave Estrangeira referenciando a tabela sorteio) ▪ nome ▪ equipe ▪ Supervisão ▪ via-qr.
+▪ Participante ▪ participante_id ▪ (Chave Primária) ▪ sorteio_id (Chave Estrangeira referenciando a tabela sorteio) ▪ nome ▪ equipe ▪ Supervisão ▪ via_qr.
 
-▪ Resultado ▪ resultado-id ▪ (Chave Primária) ▪ sorteio_id ▪ (Chave Estrangeira referenciando a tabela sorteio) ▪ participante-id ▪ posicao. 
+▪ Resultado ▪ resultado-id ▪ (Chave Primária) ▪ sorteio_id ▪ participante-id ▪ (Chave Estrangeira referenciando as tabelas sorteio e participante) ▪ posicao. 
 
-▪ QRCode ▪ qr-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ codigo ▪ data_geracao.
+▪ QRCode ▪ qr-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ codigo_qr ▪ data_geracao.
 
-▪ Publicidade ▪ publicidade_id ▪ (Chave Primária) ▪ titulo ▪ imagem_url ▪link-destino ▪ tipo.
+▪ Publicidade ▪ publicidade_id ▪ (Chave Primária) ▪ titulo ▪ imagem_url ▪link_destino ▪ tipo.
 
 ▪ Arquivos ▪ arquivos-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ nome-arquivo ▪ data_geracao.
 
 
-▪ Configuracoes sorteio ▪ configuracoes_sorteio-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ chave ▪valor.
+▪ Configuracoes sorteio ▪ configuracoes_sorteio-id ▪ (Chave Primária) ▪ sorteio-id (Chave Estrangeira referenciando a tabela sorteio) ▪ chave ▪ valor.
 
 
 # Modelo Lógico com as normalizações
@@ -67,6 +70,10 @@ A modelação  do banco de dados foi feito à partir da definição das entidade
 create database roletadb;
 
 -- Criação das tabelas que serão inseridas no banco de dados da roleta da empresa.
+create table roleta (
+	id_roleta int auto_increment primary key
+);
+    
 create table empresa (
     id_empresa int auto_increment primary key,
     nome varchar(255) not null,
@@ -123,17 +130,13 @@ create table resultado (
 
 --  tabela de QR codes para participação da roleta
 create table qrcode (
-	id_qr int auto_increment primary key,
+	id_qrode int auto_increment primary key,
 	id_sorteio int not null, 
 	codigo varchar(255) unique not null,
 	data_geracao datetime default current_timestamp,
 	foreign key (id_sorteio) references sorteio(id_sorteio) on delete cascade
 );
 
--- a tabela publicidade não faz relacão com nenhuma outra tabela, sendo assim, 
--- ela pode ser considerada como tabela independente,
--- sendo utilizada apenas para armazenar innformações de arquivos de anúncios
--- que serão exibidos no sistema.
 create table publicidade (
 	id_publicidade int auto_increment primary key,
 	titulo varchar(255) not null,
@@ -146,12 +149,12 @@ create table publicidade (
     -- QR intermediario ou final indica onde, como ele será posicionado no anuncio e exibido no sistema.
 );
 
-ALTER TABLE sorteio ADD COLUMN finalizado BOOLEAN DEFAULT FALSE; -- o dowload do pdf da roleta com todos
+alter table sorteio add column finalizado boolean default false; -- o dowload do pdf da roleta com todos
 -- os nomes e posições dos participantes só serão disponibilizados após a finalização do sorteio.
 -- sendo assim, antes do sorteio, finalizado = FALSE (ninguém pode baixar).
 -- depois do sorteio, finalizado = TRUE (todos podem baixar).
 
--- dessa forma, será necessário a criação de uma tabela chamada arquivos para armazenar todos os arquivos de pdfs gerados a cada sorteio realizado.
+-- dessa forma, foi necessário a criação de uma tabela chamada arquivos para armazenar todos os arquivos de pdfs gerados a cada sorteio realizado.
 -- assim, podemos manter um histórico dos sorteios.
 
 create table arquivos (
@@ -160,25 +163,28 @@ create table arquivos (
 	nome_arquivo varchar(255) not null,
 	data_geracao timestamp default current_timestamp,
 	foreign key (id_sorteio) references sorteio(id_sorteio) on delete cascade
-    -- com essa tabela, será permitido que qualquer participante baixe o arquivo.
+    -- com essa tabela, é permitido que qualquer participante baixe o arquivo.
 );
 
--- está tabela seráa criada, caso no futuro sinta a necessidade de mudar regras da roleta, 
+-- está tabela foi criada, caso no futuro sinta a necessidade de mudar regras da roleta, 
 -- tempo de animação e até mesmo critéios de desempate.
 create table configuracoes_sorteio (
-	id_configurações_sorteio int auto_increment primary key,
+	id_configuracoes_sorteio int auto_increment primary key,
     id_sorteio int not null,
     chave varchar (255) not null,
     -- chave e valor são para arazenas futuras alterações de configuração da roleta.
     valor varchar (255) not null,
     foreign key (id_sorteio) references sorteio(id_sorteio) on delete cascade
 );
+
+-- alter table qrcode
+-- change column id_qr id_qrcode int;
 ```
 
 ## Modelo de Entidade Relacional
 
 #### Diagrama do relacionamento - ROLETA
-<img src="diagrama-de-relacionamento-roleta2.png" width=1000>
+<img src="diagrama-de-relacionamento-roleta.png" width=1000>
 
 
 
