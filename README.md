@@ -54,11 +54,14 @@ roleta ▪ roleta_id (Chave Primária).
 
 
 # Modelo Lógico com as normalizações
-<img src="normalizacao-livre2.png" width=1000 height=80>
+<img src="normalizacao-livre-atualizada.png" width=1000 height=80>
 
 ## 1 Normalização
+<img src="primeira-normalizacao.png" width=1000 height=80>
+
 
 ## 2 Normalização
+<img src="segunda-normalizacao.png" width=1000 height=80>
 
 ## 3 Normalização
 
